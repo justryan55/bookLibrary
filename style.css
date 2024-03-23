@@ -61,3 +61,13 @@ dialog[open] {
 .book-title {
     font-weight: bold;
 }
+
+.footer {
+    display: flex;
+    padding-top: 500px;
+    justify-content: center;
+}
+
+.footer img {
+    height: 50px;
+}
