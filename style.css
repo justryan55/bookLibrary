@@ -47,7 +47,18 @@ dialog[open] {
     font-size: 18px;
 }
 
-.book-title, .book-author, .book-pages {
+#book {
+    /* border: black 2px solid; */
+    width: 30%;
+}
+
+.book-title, .book-author, .book-pages, .book-is-read {
+    display: flex;
+    justify-content: flex-start;
     padding: 10px;
+}
+
+.book-title {
+    font-weight: bold;
 }
 
