@@ -6,6 +6,7 @@ const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
 const pagesInput = document.getElementById("pages");
 const isReadInput = document.getElementById("is-read");
+const displayBook = document.getElementById("book");
 const myLibrary = [];
 
 function Book(title, author, pages, isRead) {
@@ -26,6 +27,34 @@ function addBookToLibrary(){
     authorInput.value = "";
     pagesInput.value = "";
     isReadInput.checked = false;
+    displayNewBookOnPage();
+};
+
+function displayNewBookOnPage(){
+    let bookTitle = document.createElement('div');
+    let bookAuthor = document.createElement('div');
+    let bookPages = document.createElement('div');
+    let bookIsRead = document.createElement('div');
+
+    bookTitle.classList.add('book-title');
+    bookAuthor.classList.add('book-author');
+    bookPages.classList.add('book-pages');
+    bookIsRead.classList.add('book-is-read');
+
+    myLibrary.forEach(book => {
+        bookTitle.textContent = '"' + book.title + '"';
+        bookAuthor.textContent = book.author;
+        bookPages.textContent = book.pages + " " + "pages";
+        if (book.isRead){
+            bookIsRead.textContent = "Read";
+        } else {
+            bookIsRead.textContent = "Not read";
+        }
+        displayBook.appendChild(bookTitle);
+        displayBook.appendChild(bookAuthor);
+        displayBook.appendChild(bookPages);
+        displayBook.appendChild(bookIsRead);
+        })
 };
 
 addBookBtnDialog.addEventListener("click", addBookToLibrary);
@@ -37,8 +66,3 @@ addBookBtn.addEventListener("click", () => {
 closeBookBtn.addEventListener("click", () => {
     dialog.close();
 });
-
-const book1 = new Book("Scar Tissue", "Anthony Kiedis", 300);
-const book2 = new Book("Awaken the Giant Within", "Tony Robbins", 300);
-
-

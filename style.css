@@ -38,3 +38,16 @@ dialog[open] {
     font-size: 15px;
     padding: 10px;
 }
+
+#display-books {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    padding: 50px;
+    font-size: 18px;
+}
+
+.book-title, .book-author, .book-pages {
+    padding: 10px;
+}
+
