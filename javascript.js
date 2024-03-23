@@ -40,10 +40,15 @@ function displayNewBookOnPage(){
         bookAuthor.classList.add('book-author');
         let bookPages = document.createElement('p');
         bookPages.classList.add('book-pages');
-        let bookIsRead = document.createElement('div');
-        bookIsRead.classList.add('book-is-read');
         let bookContainer = document.createElement('div');
         bookContainer.classList.add('book');
+        let buttonGroup = document.createElement('div');
+        buttonGroup.classList.add('button-group');
+        let removeBtn = document.createElement('button');
+        removeBtn.textContent = "Remove";
+        removeBtn.classList.add('remove-button');
+        let bookIsRead = document.createElement('div');
+        bookIsRead.classList.add('book-is-read');
 
         bookTitle.textContent = '"' + book.title + '"';
         bookAuthor.textContent = book.author;
@@ -53,9 +58,15 @@ function displayNewBookOnPage(){
         bookContainer.appendChild(bookTitle);
         bookContainer.appendChild(bookAuthor);
         bookContainer.appendChild(bookPages);
-        bookContainer.appendChild(bookIsRead);
-
+        bookContainer.appendChild(buttonGroup)
+        buttonGroup.appendChild(bookIsRead);
+        buttonGroup.appendChild(removeBtn);
         displayBook.appendChild(bookContainer);
+        
+        removeBtn.addEventListener("click", () => {
+            myLibrary.pop();
+            bookContainer.remove();
+        });
         })
 };
 
