@@ -6,7 +6,7 @@ const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
 const pagesInput = document.getElementById("pages");
 const isReadInput = document.getElementById("is-read");
-const displayBook = document.getElementById("book");
+const displayBook = document.getElementById("display-books");
 const myLibrary = [];
 
 function Book(title, author, pages, isRead) {
@@ -31,29 +31,31 @@ function addBookToLibrary(){
 };
 
 function displayNewBookOnPage(){
-    let bookTitle = document.createElement('div');
-    let bookAuthor = document.createElement('div');
-    let bookPages = document.createElement('div');
-    let bookIsRead = document.createElement('div');
-
-    bookTitle.classList.add('book-title');
-    bookAuthor.classList.add('book-author');
-    bookPages.classList.add('book-pages');
-    bookIsRead.classList.add('book-is-read');
+    displayBook.innerHTML = "";
 
     myLibrary.forEach(book => {
+        let bookTitle = document.createElement('div');
+        bookTitle.classList.add('book-title');
+        let bookAuthor = document.createElement('p');
+        bookAuthor.classList.add('book-author');
+        let bookPages = document.createElement('p');
+        bookPages.classList.add('book-pages');
+        let bookIsRead = document.createElement('div');
+        bookIsRead.classList.add('book-is-read');
+        let bookContainer = document.createElement('div');
+        bookContainer.classList.add('book');
+
         bookTitle.textContent = '"' + book.title + '"';
         bookAuthor.textContent = book.author;
         bookPages.textContent = book.pages + " " + "pages";
-        if (book.isRead){
-            bookIsRead.textContent = "Read";
-        } else {
-            bookIsRead.textContent = "Not read";
-        }
-        displayBook.appendChild(bookTitle);
-        displayBook.appendChild(bookAuthor);
-        displayBook.appendChild(bookPages);
-        displayBook.appendChild(bookIsRead);
+        bookIsRead.textContent = book.isRead ? "Read" : "Not read";
+
+        bookContainer.appendChild(bookTitle);
+        bookContainer.appendChild(bookAuthor);
+        bookContainer.appendChild(bookPages);
+        bookContainer.appendChild(bookIsRead);
+
+        displayBook.appendChild(bookContainer);
         })
 };
 
