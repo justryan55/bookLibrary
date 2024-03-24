@@ -7,6 +7,7 @@ const authorInput = document.getElementById("author");
 const pagesInput = document.getElementById("pages");
 const isReadInput = document.getElementById("is-read");
 const displayBook = document.getElementById("display-books");
+const errorMsg = document.getElementById("errormsg");
 const myLibrary = [];
 
 function Book(title, author, pages, isRead) {
@@ -22,12 +23,34 @@ function addBookToLibrary(){
     const pages = pagesInput.value;
     const isRead = isReadInput.checked;
     const newBook = new Book(title, author, pages, isRead);
-    myLibrary.push(newBook);
-    titleInput.value = "";
-    authorInput.value = "";
-    pagesInput.value = "";
-    isReadInput.checked = false;
-    displayNewBookOnPage();
+    if (titleInput.value !== "" && authorInput.value !== "" && pagesInput.value !== ""){
+        myLibrary.push(newBook);
+        titleInput.value = "";
+        authorInput.value = "";
+        pagesInput.value = "";
+        isReadInput.checked = false;
+        displayNewBookOnPage();
+    } else {
+        errorMsg.innerText = "Please complete all fields."
+    }
+};
+
+function clearErrorMsgAfterUserInput(){
+    titleInput.addEventListener("input", () => {
+        if (titleInput.value !== ""){
+            errorMsg.innerText = "";
+        }
+    });
+    authorInput.addEventListener("input", () => {
+        if (authorInput.value !== ""){
+            errorMsg.innerText = "";
+        }
+    })
+    pagesInput.addEventListener("input", () => {
+        if (pagesInput.value !== ""){
+            errorMsg.innerText = ""
+        }
+    })
 };
 
 function displayNewBookOnPage(){
@@ -78,4 +101,11 @@ addBookBtn.addEventListener("click", () => {
 
 closeBookBtn.addEventListener("click", () => {
     dialog.close();
+    errorMsg.innerText = "";
+    titleInput.value = "";
+    authorInput.value = "";
+    pagesInput.value = "";
+    isReadInput.checked = false;
 });
+
+clearErrorMsgAfterUserInput();
