@@ -15,6 +15,9 @@ function Book(title, author, pages, isRead) {
     this.author = author;
     this.pages = pages;
     this.isRead = isRead;
+    this.toggleReadStatus = function(isRead){
+        this.isRead = isRead;
+    }
 };
 
 function addBookToLibrary(){
@@ -23,6 +26,7 @@ function addBookToLibrary(){
     const pages = pagesInput.value;
     const isRead = isReadInput.checked;
     const newBook = new Book(title, author, pages, isRead);
+
     if (titleInput.value !== "" && authorInput.value !== "" && pagesInput.value !== ""){
         myLibrary.push(newBook);
         titleInput.value = "";
@@ -30,6 +34,7 @@ function addBookToLibrary(){
         pagesInput.value = "";
         isReadInput.checked = false;
         displayNewBookOnPage();
+        dialog.close();
     } else {
         errorMsg.innerText = "Please complete all fields."
     }
@@ -53,44 +58,59 @@ function clearErrorMsgAfterUserInput(){
     })
 };
 
+function createBookElement(book){
+    let bookTitle = document.createElement('div');
+    let bookAuthor = document.createElement('p');
+    let bookPages = document.createElement('p');
+    let bookContainer = document.createElement('div');
+    let buttonGroup = document.createElement('div');
+    let bookIsRead = document.createElement('div');
+    let removeBtn = document.createElement('button');
+
+    bookTitle.classList.add('book-title');
+    bookAuthor.classList.add('book-author');
+    bookPages.classList.add('book-pages');
+    bookContainer.classList.add('book');
+    buttonGroup.classList.add('button-group');
+    bookIsRead.classList.add('book-is-read');
+    removeBtn.classList.add('remove-button');
+
+    removeBtn.textContent = "Remove";
+
+    bookTitle.textContent = '"' + book.title + '"';
+    bookAuthor.textContent = book.author;
+    bookPages.textContent = book.pages + " " + "pages";
+    bookIsRead.textContent = book.isRead ? "Read" : "Not read";
+
+    bookContainer.appendChild(bookTitle);
+    bookContainer.appendChild(bookAuthor);
+    bookContainer.appendChild(bookPages);
+    bookContainer.appendChild(buttonGroup);
+    
+    buttonGroup.appendChild(bookIsRead);
+    buttonGroup.appendChild(removeBtn);
+
+    bookIsRead.addEventListener("click", () => {
+        book.toggleReadStatus;
+    })
+
+    removeBtn.addEventListener("click", () => {
+        myLibrary.pop();
+        bookContainer.remove();
+    });
+
+
+    return bookContainer;
+};
+
+
 function displayNewBookOnPage(){
     displayBook.innerHTML = "";
 
     myLibrary.forEach(book => {
-        let bookTitle = document.createElement('div');
-        bookTitle.classList.add('book-title');
-        let bookAuthor = document.createElement('p');
-        bookAuthor.classList.add('book-author');
-        let bookPages = document.createElement('p');
-        bookPages.classList.add('book-pages');
-        let bookContainer = document.createElement('div');
-        bookContainer.classList.add('book');
-        let buttonGroup = document.createElement('div');
-        buttonGroup.classList.add('button-group');
-        let removeBtn = document.createElement('button');
-        removeBtn.textContent = "Remove";
-        removeBtn.classList.add('remove-button');
-        let bookIsRead = document.createElement('div');
-        bookIsRead.classList.add('book-is-read');
-
-        bookTitle.textContent = '"' + book.title + '"';
-        bookAuthor.textContent = book.author;
-        bookPages.textContent = book.pages + " " + "pages";
-        bookIsRead.textContent = book.isRead ? "Read" : "Not read";
-
-        bookContainer.appendChild(bookTitle);
-        bookContainer.appendChild(bookAuthor);
-        bookContainer.appendChild(bookPages);
-        bookContainer.appendChild(buttonGroup)
-        buttonGroup.appendChild(bookIsRead);
-        buttonGroup.appendChild(removeBtn);
-        displayBook.appendChild(bookContainer);
-        
-        removeBtn.addEventListener("click", () => {
-            myLibrary.pop();
-            bookContainer.remove();
-        });
-        })
+        const bookElement = createBookElement(book);
+        displayBook.appendChild(bookElement);
+    })
 };
 
 addBookBtnDialog.addEventListener("click", addBookToLibrary);
