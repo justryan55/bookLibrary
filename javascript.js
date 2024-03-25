@@ -112,19 +112,22 @@ function displayNewBookOnPage(){
     })
 };
 
-addBookBtnDialog.addEventListener("click", addBookToLibrary);
+function addEventListeners(){
+    addBookBtnDialog.addEventListener("click", addBookToLibrary);
 
-addBookBtn.addEventListener("click", () => {
-    dialog.showModal();
-});
-
-closeBookBtn.addEventListener("click", () => {
-    dialog.close();
-    errorMsg.innerText = "";
-    titleInput.value = "";
-    authorInput.value = "";
-    pagesInput.value = "";
-    isReadInput.checked = false;
-});
+    addBookBtn.addEventListener("click", () => {
+        dialog.showModal();
+    });
+    
+    closeBookBtn.addEventListener("click", () => {
+        dialog.close();
+        errorMsg.innerText = "";
+        titleInput.value = "";
+        authorInput.value = "";
+        pagesInput.value = "";
+        isReadInput.checked = false;
+    });    
+}
 
 clearErrorMsgAfterUserInput();
+addEventListeners();
