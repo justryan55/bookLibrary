@@ -15,7 +15,7 @@ function Book(title, author, pages, isRead) {
     this.author = author;
     this.pages = pages;
     this.isRead = isRead;
-    this.toggleReadStatus = function(isRead){
+    this.toggleReadStatus = function(){
         this.isRead = isRead;
     }
 };
