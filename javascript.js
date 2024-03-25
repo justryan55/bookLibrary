@@ -99,7 +99,6 @@ function createBookElement(book){
         bookContainer.remove();
     });
 
-
     return bookContainer;
 };
 
