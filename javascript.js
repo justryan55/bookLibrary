@@ -102,7 +102,6 @@ function createBookElement(book){
     return bookContainer;
 };
 
-
 function displayNewBookOnPage(){
     displayBook.innerHTML = "";
 
