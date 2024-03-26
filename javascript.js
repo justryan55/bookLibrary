@@ -10,18 +10,24 @@ const displayBooksElement = document.getElementById("display-books");
 const errorMsg = document.getElementById("errormsg");
 const myLibrary = [];
 
-function Book() {
-    this.title = titleInput.value;
-    this.author = authorInput.value;
-    this.pages = pagesInput.value;
-    this.isRead = isReadInput.checked;
-    this.toggleReadStatus = () => {
-        this.isRead = (isReadInput.checked) ? "Read" : "Not read"; 
+function Book(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+
+    this.toggleReadStatus = function(){
+        this.isRead = !this.isRead;
+        displayLibraryOnPage();
     }
 };
 
-function addBookToLibrary(){
-    const newBook = new Book();
+function addBookToLibrary() {
+    const title = titleInput.value;
+    const author = authorInput.value;
+    const pages = pagesInput.value;
+    const isRead = isReadInput.checked;
+    const newBook = new Book(title, author, pages, isRead);
 
     if (titleInput.value === "" && authorInput.value === "" && pagesInput.value === "") {
         errorMsg.innerText = "Please complete all fields."
