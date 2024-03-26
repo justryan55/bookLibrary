@@ -6,38 +6,37 @@ const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
 const pagesInput = document.getElementById("pages");
 const isReadInput = document.getElementById("is-read");
-const displayBook = document.getElementById("display-books");
+const displayBooksElement = document.getElementById("display-books");
 const errorMsg = document.getElementById("errormsg");
 const myLibrary = [];
 
-function Book(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-    this.toggleReadStatus = function(){
-        this.isRead = isRead;
+function Book() {
+    this.title = titleInput.value;
+    this.author = authorInput.value;
+    this.pages = pagesInput.value;
+    this.isRead = isReadInput.checked;
+    this.toggleReadStatus = () => {
+        this.isRead = (isReadInput.checked) ? "Read" : "Not read"; 
     }
 };
 
 function addBookToLibrary(){
-    const title = titleInput.value;
-    const author = authorInput.value;
-    const pages = pagesInput.value;
-    const isRead = isReadInput.checked;
-    const newBook = new Book(title, author, pages, isRead);
+    const newBook = new Book();
 
-    if (titleInput.value !== "" && authorInput.value !== "" && pagesInput.value !== ""){
-        myLibrary.push(newBook);
-        titleInput.value = "";
-        authorInput.value = "";
-        pagesInput.value = "";
-        isReadInput.checked = false;
-        displayNewBookOnPage();
-        dialog.close();
-    } else {
+    if (titleInput.value === "" && authorInput.value === "" && pagesInput.value === "") {
         errorMsg.innerText = "Please complete all fields."
+        return;
     }
+
+    myLibrary.push(newBook);
+    displayLibraryOnPage();
+
+    titleInput.value = "";
+    authorInput.value = "";
+    pagesInput.value = "";
+    isReadInput.checked = false;
+
+    dialog.close();
 };
 
 function clearErrorMsgAfterUserInput(){
@@ -91,23 +90,24 @@ function createBookElement(book){
     buttonGroup.appendChild(removeBtn);
 
     bookIsRead.addEventListener("click", () => {
-        book.toggleReadStatus;
+        book.toggleReadStatus();
     })
 
     removeBtn.addEventListener("click", () => {
-        myLibrary.pop();
-        bookContainer.remove();
+        const bookIndex = myLibrary.indexOf(book);
+        myLibrary.splice(bookIndex, 1);
+        displayLibraryOnPage();
     });
 
     return bookContainer;
 };
 
-function displayNewBookOnPage(){
-    displayBook.innerHTML = "";
+function displayLibraryOnPage() {
+    displayBooksElement.innerHTML = "";
 
     myLibrary.forEach(book => {
         const bookElement = createBookElement(book);
-        displayBook.appendChild(bookElement);
+        displayBooksElement.appendChild(bookElement);
     })
 };
 
