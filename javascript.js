@@ -10,17 +10,19 @@ const displayBooksElement = document.getElementById("display-books");
 const errorMsg = document.getElementById("errormsg");
 const myLibrary = [];
 
-function Book(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
+class Book{
+    constructor(title, author, pages, isRead){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
 
-    this.toggleReadStatus = function(){
+    toggleReadStatus(){
         this.isRead = !this.isRead;
         displayLibraryOnPage();
     }
-};
+}
 
 function addBookToLibrary() {
     const title = titleInput.value;
