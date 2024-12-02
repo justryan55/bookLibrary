@@ -1,29 +1,18 @@
 # Book Library
 
-A book library application built using Vanilla JS.
+A book library application built using Vanilla JavaScript.
 
-## Table of Contents
+## Technologies Used
+- **Frontend**: JavaScript, CSS, HTML
 
-- [Introduction](#introduction)
-- [Getting Started](#getting-started)
-- [Features](#features)
+---
 
-  
-## Introduction
+## First Time Setup
 
-The Book Library App is a web application designed to help users manage their personal book collections.
+### 1. Clone the Repository
+To get started with the project, clone this repository to your local machine:
+```bash
+git clone https://github.com/justryan55/bookLibrary.git
 
-## Getting Started
 
-To run the application locally, you can use the following npm commands:
 
-- npm start: Runs the app in development mode. Open http://localhost:3000 to view it in your browser.
-- npm test: Launches the test runner in interactive watch mode.
-- npm run build: Builds the app for production to the build folder.
-
-## Features
-
-- Add books to the library
-- Delete books from the library
-- Mark books as read or unread
-- Save/load books to the library (feature yet to be added)
